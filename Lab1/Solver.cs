@@ -15,6 +15,7 @@ internal class Solver
         }
 
         var c = a;
+        var count = 0;
         while (Math.Abs(b - a) >= Epsilon)
         {
             c = (a + b) / 2;
@@ -22,6 +23,8 @@ internal class Solver
             {
                 break;
             }
+
+            count++;
 
             if (Func(c) * Func(a) < 0)
             {
@@ -32,6 +35,8 @@ internal class Solver
                 a = c;
             }
         }
+
+        Console.WriteLine($"Bisection count: {count}");
 
         return c;
     }
@@ -65,14 +70,17 @@ internal class Solver
     public static double NewtonMethod(double x)
     {
         var h = Func(x) / DerivativeOfFunc(x);
+        var count = 0;
         while (Math.Abs(h) >= Epsilon)
         {
             h = Func(x) / DerivativeOfFunc(x);
 
             // x(i+1) = x(i) - f(x) / f'(x)
             x -= h;
+            count++;
         }
 
+        Console.WriteLine($"Newton count: {count}");
         return x;
     }
 
