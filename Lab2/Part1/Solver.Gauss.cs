@@ -1,4 +1,4 @@
-﻿namespace Lab2;
+﻿namespace Lab2.Part1;
 
 public partial class Solver
 {

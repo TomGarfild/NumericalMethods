@@ -64,16 +64,16 @@ public class MatrixHelper
             for (var j = 0; j < n; j++)
             {
                 result[i, j] = hilbert ? 1.0 / (i + j + 1) : _random.Next(LowerBound, UpperBound);
-                value += Math.Abs(result[i, j]);
+                // value += Math.Abs(result[i, j]);
             }
 
-            result[i, i] = value + 1;
+            // result[i, i] = value + 1;
         }
 
         return result;
     }
 
-    public static double[,] Multiply(double[,] a, double[] b)
+    public static double[] Multiply(double[,] a, double[] b)
     {
         var dimension = b.GetLength(0);
 
@@ -84,7 +84,12 @@ public class MatrixHelper
             bNew[i, 0] = b[i];
         }
 
-        return Multiply(a, bNew);
+        var res = Multiply(a, bNew);
+        var newREs = new double[dimension];
+
+        for (int i = 0; i < dimension; i++) newREs[i] = res[i, 0];
+
+        return newREs;
     }
 
     public static double[,] Multiply(double[,] a, double[,] b)
@@ -168,4 +173,5 @@ public class MatrixHelper
     {
         return vector.Select(Math.Abs).Max() <= Eps;
     }
+
 }
